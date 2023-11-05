@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        ul.navbar {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        ul.navbar li {
+            float: left;
+        }
+
+        ul.navbar li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        ul.navbar li a:hover {
+            background-color: #444;
+        }
+
+        ul.navbar li.right {
+            float: right;
+        }
+
+        .login-button, .signup-button {
+            background-color: #555;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            padding: 14px 16px;
+            margin: 8px 4px;
+            cursor: pointer;
+        }
+
+        .login-button:hover, .signup-button:hover {
+            background-color: #777;
+        }
+
+        /* Content area styles */
+        .content {
+            margin-left: 0;
+            padding: 20px;
+            transition: margin-left 0.5s;
+        }
+    </style>
+    <!-- Add CSS and other necessary styles here -->
+</head>
+<body>
+    <ul class="navbar">
+        <li>
+            <a href="zomato.html"><img src="logo.jpg" alt="Famished Logo" style="height: 100px;"></a> 
+            
+        </li>
+       
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Past Orders</a></li>
+        <li><a href="#">About Us</a></li>
+        
+        <!-- Add Login and Signup buttons on the right -->
+        <li class="right"><a class="signup-button" href="Signup.html">Signup</a></li>
+        <li class="right"><a class="login-button" href="Login.html">Login</a></li>
+    </ul>
+
+    <h2>Log In</h2>
+
+    <form action="login.php" method="post">
+        <label for="UserName">User Name:</label>
+        <input type="text" id="UserName" name="UserName" required><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <input type="submit" value="Login">
+    </form>
+    <p>New user, <a href="Signup.html">sign up!</a></p>
+</body>
+</html>

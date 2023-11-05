@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Styles for the corndog page */
+        .corndog-container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .corndog-img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .corndog-details {
+            margin: 20px 0;
+        }
+
+        .quantity {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .quantity label {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .quantity input[type="number"] {
+            width: 40px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .checkout-button {
+            display: inline-block;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="corndog-container">
+        <h1>Corndog</h1>
+        <img class="corndog-img" src="corndog.jpg" alt="Corndog">
+        <div class="corndog-details">
+            <p>Deep fried corndog, super scrumptious.</p>
+            <p>Price: $4.99</p>
+        </div>
+        <form method="post" action="checkout.php">
+            <div class="quantity">
+                <label for="corndog-quantity">Quantity:</label>
+                <input type="number" name="corndog-quantity" value="0" min="0" max="10">
+                <input type="hidden" name="item-name" value="Corndog">
+                <input type="submit" class="checkout-button" value="Add to Cart">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

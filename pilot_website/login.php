@@ -1,0 +1,232 @@
+<?php
+$UserName = $_POST['UserName'];
+$password = $_POST['password'];
+$_SESSION['UserName'] = $UserName;
+
+$con = new mysqli("localhost", "root", "", "test");
+if ($con->connect_error) {
+    die("Failed to connect: " . $con->connect_error);
+} else {
+    $stmt = $con->prepare("select * from registration where UserName = ?");
+    $stmt->bind_param("s", $UserName);
+    $stmt->execute();
+    $stmt_result = $stmt->get_result();
+    
+    $loginSuccess = false; // Set a flag to indicate failed login by default
+    
+    if ($stmt_result->num_rows > 0) {
+        $data = $stmt_result->fetch_assoc();
+        if ($data['password'] === $password) {
+            $loginSuccess = true; // Set the flag to indicate successful login
+            echo "<h2>Welcome $UserName!, you have successfully logged in!</h2>";
+        }
+    }
+    
+    if (!$loginSuccess) {
+        echo "<h2>Invalid UserName or password</h2>";
+        echo '<a href="login.html"><button>Please try again</button></a>';
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+        ul.navbar {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        ul.navbar li {
+            float: left;
+        }
+
+        ul.navbar li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        ul.navbar li a:hover {
+            background-color: #444;
+        }
+
+        ul.navbar li.right {
+            float: right;
+        }
+
+        .login-button, .signup-button {
+            background-color: #555;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            padding: 14px 16px;
+            margin: 8px 4px;
+            cursor: pointer;
+        }
+
+        .login-button:hover, .signup-button:hover {
+            background-color: #777;
+        }
+
+        /* Content area styles */
+        .content {
+            margin-left: 0;
+            padding: 20px;
+            transition: margin-left 0.5s;
+        }
+
+    
+        
+
+        /* Styles for food boxes */
+        .food-box {
+            width: 250px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .food-box img {
+            max-width: 100%;
+            height: 230px;
+        }
+
+        .food-box h3 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .food-box p {
+            font-size: 16px;
+        }
+        .food-container {
+    display: flex;
+    flex-direction: column; /* Stack the rows vertically */
+}
+
+.food-row1, .food-row2 {
+    display: flex;
+    justify-content: space-between; /* Distribute the food boxes evenly in each row */
+}
+
+        .background-div {
+            background-image: url('fast_food.jpg');
+            background-size: auto; /* Adjust this as needed */
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 200px; /* Adjust the height as needed */
+        }
+    </style>
+</head>
+<body>
+    <ul class="navbar">
+        <li>
+            <a href="Login.html"><img src="logo.jpg" alt="Famished Logo" style="height: 100px;"></a>
+        </li>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Past Orders</a></li>
+        <li><a href="#">About Us</a></li>
+       
+        <?php
+    if ($loginSuccess) {
+        echo '<li class="right"><a class="login-button" href="logout.php">Log Out</a></li>';
+        echo '<li class="right">
+            <a href="profile.php?username=' . $UserName . '">
+                <img src="user-icon.jpg" alt="User Icon" style="height: 30px; width: 30px; margin-right: 5px;">
+                <span style="font-size: 30px;">' . $UserName . '</span>
+            </a>
+        </li>';
+        echo '<li class="right"><a class="login-button" href="delete_profile.php">Delete Profile</a></li>';
+       
+    }
+    ?>
+    </ul>
+
+    <div style="color:black;padding:20px; background-color: grey;" class="background-div">
+        <h1>Welcome to Famished Fox</h1>
+        <p>This is an independent food delivery site please help yourself!</p>
+    </div>
+
+    <div class="food-container">
+        <div class="food-row1">
+        <div class="food-box">
+            <a href="Burger.html"><img src="burger.jpg" alt="Burger"></a>
+            <h3>Burger</h3>
+            <p>Delicious beef burger with lettuce, cheese, and special sauce.</p>
+            <p>$8.99</p>
+        </div>
+
+        <div class="food-box">
+            <a href="Pizza.html"><img src="pizza.jpg" alt="Pizza"></a>
+            <h3>Pizza</h3>
+            <p>Freshly baked pizza with your choice of toppings.</p>
+            <p>$10.99</p>
+        </div>
+
+        <div class="food-box">
+            <a href="Spaghetti.html"><img src="Spaghetti.jpg" alt="Spaghetti"></a>
+            <h3>Spaghetti</h3>
+            <p>Fresh Spaghetti with minced beef.</p>
+            <p>$12.99</p>
+        </div>
+
+        <div class="food-box">
+            <a href="Fries.html"><img src="fries.jpg" alt="French Fries"></a>
+            <h3>French fries</h3>
+            <p>Freshly cooked fries in an air fryer to reduce calorie intake</p>
+            <p>$2.99</p>
+        </div>
+        </div>
+        
+        
+
+        
+
+        
+
+        
+
+    <div class="food-row2">
+        <div class="food-box">
+            <a href="Meatbox.html"><img src="meatbox.jpg" alt="Meatbox"></a>
+            <h3>Meatbox</h3>
+            <p>Meatbox bombarded with chicken,sausage,fries,coleslaw and house special sauce.</p>
+            <p>$7.99</p>
+        </div>
+
+        <div class="food-box">
+            <a href="Greeksalad.html"><img src="greeksalad.jpg" alt="Greeksalad"></a>
+            <h3>Greeksalad</h3>
+            <p>Greek salad made with pure olive oil, a perfect meal for health conscious patrons.</p>
+            <p>$9.99</p>
+        </div>
+
+        <div class="food-box">
+            <a href="Chicken.html"><img src="chicken.jpg" alt="Chicken"></a>
+            <h3>Korean bbq chicken</h3>
+            <p>Fried chicken dipped in korean bbq sauce.</p>
+            <p>$6.99</p>
+        </div>
+
+        <div class="food-box">
+            <a href="Corndog.html"><img src="corndog.jpg" alt="Corndog"></a>
+            <h3>Corndog</h3>
+            <p>Deep fried corndog, super scrumptious.</p>
+            <p>$4.99</p>
+        </div>
+
+    </div>
+    </div>
+</body>
+</html>

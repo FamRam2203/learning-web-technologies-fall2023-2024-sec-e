@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Styles for the checkout page */
+        .checkout-container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .input-field {
+            display: block;
+            margin: 20px 0;
+        }
+
+        .input-field label {
+            font-size: 18px;
+            display: block;
+        }
+
+        .input-field input[type="text"],
+        .input-field input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .payment-options {
+            margin: 20px 0;
+        }
+
+        .order-summary {
+            text-align: left;
+        }
+
+        .order-summary ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .order-summary li {
+            margin: 10px 0;
+        }
+
+        .counter-button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .total-amount {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-container">
+        <h1>Checkout</h1>
+
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <ul>
+                <li>Burger x
+                    <span><?php echo $burgerQuantity; ?></span>
+                </li>
+                <li>Pizza x
+                    <span><?php echo $pizzaQuantity; ?></span>
+                </li>
+                <li>Fries x
+                    <span><?php echo $friesQuantity; ?></span>
+                </li>
+                <li>Spaghetti x
+                    <span><?php echo $spaghettiQuantity; ?></span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="total-amount">
+            Total Amount: $<?php echo number_format($totalAmount, 2); ?>
+        </div>
+
+        <form method="post" action="checkout.php">
+            <div class="input-field">
+                <label for="address">Delivery Address:</label>
+                <input type="text" id="address">
+            </div>
+
+            <div class="input-field">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile">
+            </div>
+
+            <div class="payment-options">
+                <label>Payment Options:</label><br>
+                <input type="radio" id="cash" name="payment" value="cash">
+                <label for="cash">Cash</label>
+                <input type="radio" id="card" name="payment" value="card">
+                <label for="card">Card</label>
+            </div>
+
+            <button class="checkout-button">Confirm Order</button>
+        </form>
+    </div>
+</body>
+</html>
