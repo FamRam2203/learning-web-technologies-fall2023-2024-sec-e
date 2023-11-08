@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML FORM</title>
+    <script>
+        function validateForm() {
+            var sscCheckbox = document.getElementById("ssc");
+            var hscCheckbox = document.getElementById("hsc");
+            var bscCheckbox = document.getElementById("bsc");
+            
+            if (sscCheckbox.checked || hscCheckbox.checked || bscCheckbox.checked) {
+                return true;
+            } else {
+                alert("At least one of them has to be selected.");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <form method="post" action="Degree.HTML" enctype="multipart/form-data" onsubmit="return validateForm();">
+        <fieldset style="width: 15%">
+            <legend>DEGREE</legend>
+       
+                <input type="checkbox" id="ssc" name="degrees" value="SSC"/> SSC 
+                <input type="checkbox" id="hsc" name="degrees" value="HSC"/> HSC 
+                <input type="checkbox" id="bsc" name="degrees" value="BSc"/> BSc  
+                <br>
+                <hr>
+                <input type="submit" name="submit" value="Submit" />
+       
+        </fieldset>
+        <br>
+    </form>
+</body>
+</html>

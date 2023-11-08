@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DATE OF BIRTH Input</title>
+</head>
+<body>
+    <fieldset>
+        <legend>DATE OF BIRTH</legend>
+        <form action="Date_of_birth.HTML" method="post" onsubmit="return validateForm()">
+            <table>
+                <tr>
+                    <td align="center">dd</td>
+                    <td align="center">mm</td>
+                    <td align="center">yyyy</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="number" id="dd" name="dd" value="" required> /
+                    </td>
+                    <td>
+                        <input type="number" id="mm" name="mm" value="" required> /
+                    </td>
+                    <td>
+                        <input type="number" id="yyyy" name="yyyy" value="" required>
+                    </td>
+                </tr>
+            </table>
+            <span id="dobError" style="color: red;"></span><br>
+            <hr>
+            <input type="submit" name="submit" value="Submit">
+        </form>
+    </fieldset>
+
+    <script>
+        function validateForm() {
+            var ddInput = document.getElementById("dd");
+            var mmInput = document.getElementById("mm");
+            var yyyyInput = document.getElementById("yyyy");
+            var dobError = document.getElementById("dobError");
+            dobError.textContent = "";
+
+            var dd = parseInt(ddInput.value);
+            var mm = parseInt(mmInput.value);
+            var yyyy = parseInt(yyyyInput.value);
+
+            if (isNaN(dd) || isNaN(mm) || isNaN(yyyy) || dd < 1 || dd > 31 || mm < 1 || mm > 12 || yyyy < 1900 || yyyy > 2016) {
+                dobError.textContent = "Please enter a valid date of birth (dd: 1-31, mm: 1-12, yyyy: 1900-2016).";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
