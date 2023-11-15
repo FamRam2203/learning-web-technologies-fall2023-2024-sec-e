@@ -1,0 +1,29 @@
+<html>
+<head>
+</head>
+<body style="font-family: 'Arial', sans-serif;">
+
+    <div class="meatbox-container" style="width: 80%; margin: 0 auto; text-align: center;">
+        <h1 style="font-size: 24px;">Meatbox</h1>
+        <img class="meatbox-img" src="meatbox.jpg" alt="Meatbox" style="max-width: 250px; height: 250px;">
+        <div class="meatbox-details" style="margin: 20px 0;">
+            <p>Meatbox bombarded with chicken, sausage, fries, coleslaw, and house special sauce.</p>
+            <p style="font-size: 18px;">Price: $7.99</p>
+        </div>
+        <form method="post" action="checkout.php">
+            <div class="quantity" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                <label for="meatbox-quantity" style="font-size: 18px; margin-right: 10px;">Quantity:</label>
+                <input type="number" name="meatbox-quantity" value="0" min="0" max="10" style="width: 40px; font-size: 18px; text-align: center;">
+                <input type="hidden" name="item-name" value="Meatbox">
+                <input type="submit" class="checkout-button" value="Add to Cart" style="display: inline-block; background-color: #007BFF; color: #fff; padding: 10px 20px; font-size: 18px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none;">
+            </div>
+        </form>
+        <form method="post" action="login.php">
+            <input type="hidden" name="UserName" value="<?php echo $UserName; ?>">
+            <input type="hidden" name="password" value="<?php echo $password; ?>">
+            <input type="submit" class="go-back-button" value="Go Back">
+        </form>
+    </div>
+
+</body>
+</html>
