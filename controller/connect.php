@@ -18,8 +18,8 @@ if ($conn->connect_error) {
     echo "$conn->connect_error";
     die("Connection Failed: " . $conn->connect_error);
 } else {
-    $stmt = $conn->prepare("insert into registration(UserName, Full_Name, gender, email, password, confirmPassword, number) values(?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssi", $UserName, $Full_Name, $gender, $email, $password, $confirmPassword, $number);
+    $stmt = $conn->prepare("insert into registration(UserName, Full_Name, gender, email, password, confirmPassword, number) values(?, ?, ?, ?, ?, ?, ?)");//prepare function exectues similar sql statements with high efficiency.
+    $stmt->bind_param("ssssssi", $UserName, $Full_Name, $gender, $email, $password, $confirmPassword, $number);//binds the parameters in the sql query
     $execval = $stmt->execute();
     if ($execval) {
         // Registration was successful

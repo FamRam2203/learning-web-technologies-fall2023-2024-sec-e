@@ -1,6 +1,6 @@
 <?php
+session_start();
 
-$UserName = isset($_POST['UserName']) ? $_POST['UserName'] : 'Guest';
 // Retrieve and update item quantities from the form
 $burgerQuantity = isset($_POST['burger-quantity']) ? max((int)$_POST['burger-quantity'], 0) : 0;
 $pizzaQuantity = isset($_POST['pizza-quantity']) ? max((int)$_POST['pizza-quantity'], 0) : 0;
@@ -10,6 +10,11 @@ $meatboxQuantity = isset($_POST['meatbox-quantity']) ? max((int)$_POST['meatbox-
 $saladQuantity = isset($_POST['salad-quantity']) ? max((int)$_POST['salad-quantity'], 0) : 0;
 $chickenQuantity = isset($_POST['chicken-quantity']) ? max((int)$_POST['chicken-quantity'], 0) : 0;
 $corndogQuantity = isset($_POST['corndog-quantity']) ? max((int)$_POST['corndog-quantity'], 0) : 0;
+
+$userName = isset($_POST['UserName']) ? htmlspecialchars($_POST['UserName']) : '';
+$address = isset($_POST['address']) ? htmlspecialchars($_POST['address']) : '';
+$number = isset($_POST['number']) ? htmlspecialchars($_POST['number']) : '';
+$paymentMethod = isset($_POST['payment']) ? htmlspecialchars($_POST['payment']) : '';
 
 // Calculate the prices for each item
 $burgerPrice = $burgerQuantity * 8.99;
@@ -41,6 +46,23 @@ if ($totalAmount > 20.00) {
 <html>
 <head>
     <title>Receipt</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Make an AJAX request to get the username
+            $.ajax({
+                url: 'getUsername.php',
+                type: 'GET',
+                success: function(data) {
+                    // Update the username field with the retrieved username
+                    $('#username').text(data);
+                },
+                error: function() {
+                    console.error('Error fetching username.');
+                }
+            });
+        });
+    </script>
 </head>
 <body style="margin: 0; font-family: Arial, sans-serif;">
 <ul class="navbar" style="list-style-type: none; margin: 0; padding: 0; background-color: black; overflow: hidden;">
@@ -53,11 +75,10 @@ if ($totalAmount > 20.00) {
     </ul>
 <div style="margin-bottom: 20px;">
         <h1>Receipt</h1>
-
+        <h2>Thank You <span id="username"></span> for choosing Famished Fox!</h2>
         <div style="margin-bottom: 20px;">
         <div style="margin-bottom: 20px;">
-            <h2 style="font-size: 18px;">Thank you, <?php echo $UserName; ?>, for choosing Famished Fox!</h2>
-            <!-- Rest of your existing code... -->
+            
         </div>
             <h3 style="margin-bottom: 10px;">Order Summary</h3>
             <ul style="list-style-type: none; padding: 0;">
@@ -119,10 +140,10 @@ if ($totalAmount > 20.00) {
             Final Total Amount: $<?php echo number_format($totalAmount, 2); ?>
         </div>
 
-        <p style="font-size: 18px;">Delivery Address: <?php echo $_POST['address']; ?></p>
-        <p style="font-size: 18px;">Mobile Number: <?php echo $_POST['number']; ?></p>
-        <p style="font-size: 18px;">Payment Method: <?php echo $_POST['payment']; ?></p>
-        <a href="../view/checkout.php" style="font-size: 18px; display: block; margin-top: 20px;">Go Back and fill up a fresh order</a>
+        <p style="font-size: 18px;">Delivery Address: <?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address']) : ''; ?></p>
+        <p style="font-size: 18px;">Mobile Number: <?php echo isset($_POST['number']) ? htmlspecialchars($_POST['number']) : ''; ?></p>
+        <p style="font-size: 18px;">Payment Method: <?php echo isset($_POST['payment']) ? htmlspecialchars($_POST['payment']) : ''; ?></p>
+       
 
     </div>
 </body>

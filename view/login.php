@@ -45,14 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $loginSuccess = true;
 }
 
-// Rest of your HTML and other PHP code...
-
 ?>
-
 
 <html>
 <head>
-
 </head>
 <body style="margin: 0; font-family: Arial, sans-serif;">
 <ul class="navbar" style="list-style-type: none; margin: 0; padding: 0; background-color: black; overflow: hidden;">
@@ -109,8 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p>Freshly cooked fries in an air fryer to reduce calorie intake</p>
                 <p>$2.99</p>
             </div>
-            <!-- Add inline styles to other food-box elements as needed -->
-
         </div>
 
         <div class="food-row2" style="display: flex; justify-content: space-between;">

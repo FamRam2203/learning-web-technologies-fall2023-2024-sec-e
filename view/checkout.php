@@ -25,10 +25,8 @@ $totalAmount = $burgerPrice + $pizzaPrice + $friesPrice + $spaghettiPrice + $mea
 if ($totalAmount > 20.00) {
     $discountPercentage = 0.20; // 20% discount
     $discountAmount = $totalAmount * $discountPercentage;
-
     $maxDiscount = 10.00;
     $discountAmount = min($discountAmount, $maxDiscount);
-
     $totalAmount -= $discountAmount;
 } else {
     $discountAmount = 0; // No discount applied
@@ -39,6 +37,25 @@ if ($totalAmount > 20.00) {
 
 <html lang="en">
 <head>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Make an AJAX request to get the phone number
+    $.ajax({
+        url: 'fetch_mobile_number.php',
+        type: 'GET',
+        success: function(data) {
+            // Update the phone number field with the retrieved number if it is not empty
+            if (data !== '' && data !== 'User not found') {
+                $('#number').val(data);
+            }
+        },
+        error: function() {
+            console.error('Error fetching phone number.');
+        }
+    });
+});
+</script>
 </head>
 <body>
     <ul class="navbar" style="list-style-type: none; margin: 0; padding: 0; background-color: black; overflow: hidden;">
@@ -66,37 +83,31 @@ if ($totalAmount > 20.00) {
         <input type="number" name="pizza-quantity" class="quantity-input" value="<?php echo $pizzaQuantity; ?>" min="0">
         <span>$<?php echo number_format($pizzaPrice, 2); ?></span>
     </li>
-
     <li>
         Fries x
         <input type="number" name="fries-quantity" class="quantity-input" value="<?php echo $friesQuantity; ?>" min="0">
         <span>$<?php echo number_format($friesPrice, 2); ?></span>
     </li>
-
     <li>
         Spaghetti x
         <input type="number" name="spaghetti-quantity" class="quantity-input" value="<?php echo $spaghettiQuantity; ?>" min="0">
         <span>$<?php echo number_format($spaghettiPrice, 2); ?></span>
     </li>
-
     <li>
         Meatbox x
         <input type="number" name="meatbox-quantity" class="quantity-input" value="<?php echo $meatboxQuantity; ?>" min="0">
         <span>$<?php echo number_format($meatboxPrice, 2); ?></span>
     </li>
-
     <li>
         Salad x
         <input type="number" name="salad-quantity" class="quantity-input" value="<?php echo $saladQuantity; ?>" min="0">
         <span>$<?php echo number_format($saladPrice, 2); ?></span>
     </li>
-
     <li>
         Chicken x
         <input type="number" name="chicken-quantity" class="quantity-input" value="<?php echo $chickenQuantity; ?>" min="0">
         <span>$<?php echo number_format($chickenPrice, 2); ?></span>
     </li>
-
     <li>
         Corndog x
         <input type="number" name="corndog-quantity" class="quantity-input" value="<?php echo $corndogQuantity; ?>" min="0">
@@ -104,16 +115,11 @@ if ($totalAmount > 20.00) {
     </li>
 </ul>
 
-
                 <div class="total-amount">
                     Total Amount: $<span id="total-amount"><?php echo number_format($totalAmount, 2); ?></span>
                 </div>
-
-                
-
-
-                </div>
-                </div>
+        </div>
+</div>
 <fieldset>
     <form method="post" action="../view/receipt.php">
         <legend>Customer details</legend>
@@ -124,8 +130,10 @@ if ($totalAmount > 20.00) {
 
             <div class="form-group">
             <label for="number">Phone Number</label>
-            <input type="text" class="form-control" id="number" name="number" pattern="01[0-9]{9}" title="Please enter a valid 11-digit phone number starting with '01'" required />
+            <input type="text" class="form-control" id="number" name="number" pattern="01[0-9]{9}" title="Please enter a valid 11-digit phone number starting with '01'" value="<?php echo $number; ?>" required />
             </div>
+
+
 
             <div class="payment-options">
             <label>Payment Options:</label><br>
@@ -147,8 +155,6 @@ if ($totalAmount > 20.00) {
     <button type="submit" class="checkout-button">Confirm Order</button>
     </form>
 </fieldset>
-           
-
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </body>
 </html>

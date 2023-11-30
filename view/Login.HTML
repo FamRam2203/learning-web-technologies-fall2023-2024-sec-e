@@ -1,35 +1,28 @@
 <html>
 <head>
     <title>Login</title>
-
 </head>
 <body style="margin: 0; font-family: Arial, sans-serif;">
     <ul class="navbar" style="list-style-type: none; margin: 0; padding: 0; background-color: black; overflow: hidden;">
-        <li>
-              <img src="logo.jpg" alt="Famished Logo" style="height: 100px;">
-        </li>
-       
+        <li><img src="logo.jpg" alt="Famished Logo" style="height: 100px;"></li>   
         <li style="float: right;"><a class="login-button" href="Login.html" style="background-color: #555; border: none; color: white; text-align: center; text-decoration: none; display: inline-block; padding: 14px 16px; margin: 8px 4px; cursor: pointer;">Login</a></li>
         <li style="float: right;"><a class="signup-button" href="Signup.html" style="background-color: #555; border: none; color: white; text-align: center; text-decoration: none; display: inline-block; padding: 14px 16px; margin: 8px 4px; cursor: pointer;">Signup</a></li>
-
     </ul>
-
     
     <fieldset>
         <legend><h3>Log In</h3></legend>
+
     <form action="login.php" method="post">
         <label for="UserName">User Name:</label>
         <input type="text" id="UserName" name="UserName" required><br><br>
-        
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
-
-        
-        
         <input type="submit" value="Login">
     </form>
+
     <p>New user, <a href="Signup.html">sign up!</a></p>
-    <p>Admin? <a href="../model/Admin.php">Click here for admin login</a></p> 
+    <p>Admin? <a href="../model/Admin.php">Click here for admin login</a></p>
+     
     </fieldset>
    
 </body>
