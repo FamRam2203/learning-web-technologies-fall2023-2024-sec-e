@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="employee.css">
+    <title>Online Shop Management System</title>
+</head>
+<body>
+    <div id="login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="button" onclick="login()">Login</button>
+        </form>
+    </div>
+
+    <div id="management-container">
+        <h2>Employee Management</h2>
+        <!-- Add Employee Form -->
+        <form id="add-form">
+            <!-- ... (employee details inputs) -->
+            <button type="button" onclick="addEmployee()">Add Employee</button>
+        </form>
+
+        <!-- Update/Delete Employee Form -->
+        <form id="update-delete-form">
+            <!-- ... (employee details inputs) -->
+            <button type="button" onclick="updateEmployee()">Update Employee</button>
+            <button type="button" onclick="deleteEmployee()">Delete Employee</button>
+        </form>
+
+        <!-- Search Employee Form -->
+        <form id="search-form">
+            <label for="search">Search Employee:</label>
+            <input type="text" id="search" name="search" onkeyup="searchEmployee()">
+        </form>
+
+        <div id="employee-list"></div>
+    </div>
+
+    <script src="employee.js"></script>
+</body>
+</html>
