@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+      function checkEmailAvailability(email) {
+        // Check if the email input field is empty
+        if (email.trim() === "") {
+          document.getElementById("emailAvailability").innerHTML = "";
+          return;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "../controller/check_email.php", true);      
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4) { 
+            if (xhr.status == 200) { 
+              document.getElementById("emailAvailability").innerHTML = xhr.responseText;
+            } else {
+              console.error("Error checking email availability. Status: " + xhr.status);
+            }
+          }
+        };
+        xhr.send("email=" + encodeURIComponent(email));
+      }
+
+      function validateForm() {
+        var name = document.forms["registrationForm"]["name"].value;
+        var phone = document.forms["registrationForm"]["phone"].value;
+        var email = document.forms["registrationForm"]["email"].value;
+        var password = document.forms["registrationForm"]["password"].value;
+        var confirmPassword = document.forms["registrationForm"]["confirmpassword"].value;
+        var nameWords = name.split(' ');
+        if (nameWords.length < 2) {
+          alert("Name should not be empty and contain at least 2 words.");
+          return false;
+        }
+
+        if (!/^(01\d{9})$/.test(phone)) {
+          alert("Phone number should not be empty and contain exactly 11 digits starting from 01.");
+          return false;
+        }
+
+        if (password.length !== 6 || confirmPassword.length !== 6) {
+          alert("Password and Confirm Password should not be empty and contain exactly 6 characters.");
+          return false;
+        }
+
+        checkEmailAvailability(email);
+        return true;
+      }
+    </script>
+  </head>
+  <body>
+    <fieldset>
+      <legend>Employee Registration Form</legend>
+      <form name="registrationForm" action="../model/connect.php" method="post" onsubmit="return validateForm()">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" name="name" />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="number" class="form-control" name="phone" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email" id="email"  onblur="checkEmailAvailability(this.value)" />
+          <span id="emailAvailability"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Confirm Password</label>
+          <input type="password" class="form-control" name="confirmpassword" />
+        </div>
+
+        <input type="submit" class="btn btn-primary" />
+      </form>
+      <p>Already have an account?<a href="login.html"><button>Login</button></a></p>
+    </fieldset>
+  </body>
+</html>
